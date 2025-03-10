@@ -1,0 +1,47 @@
+version: "3.8"
+services:
+  pm_auth:
+    build: ./pm_auth
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+
+  pm_user_management:
+    build: ./pm_user_management
+    ports:
+      - "8082:8080"
+    env_file:
+      - .env
+
+  pm_project_management:
+    build: ./pm_project_management
+    ports:
+      - "8083:8080"
+    env_file:
+      - .env
+
+  pm_task_management:
+    build: ./pm_task_management
+    ports:
+      - "8084:8080"
+    env_file:
+      - .env
+
+  notification_service:
+    build: ./notification_service
+    ports:
+      - "8085:8081"
+    env_file:
+      - .env
+
+  frontend:
+    build: ./pm_front
+    ports:
+      - "8501:8501"
+    depends_on:
+      - pm_auth
+      - pm_user_management
+      - pm_project_management
+      - pm_task_management
+      - notification_service
