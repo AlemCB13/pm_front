@@ -25,5 +25,6 @@ jobs:
         cd ~/pm_front
         git pull origin main
         docker-compose down
-        docker-compose up --build -d
+        docker build -t pm_front .
+        docker run -p 8501:8501 pm_front
         EOF
